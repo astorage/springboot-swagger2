@@ -6,10 +6,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 一个用来测试swagger注解的控制器
@@ -58,5 +55,17 @@ public class SayController {
             return "新旧密码不能相同";
         }
         return "密码修改成功!";
+    }
+
+    /**
+     * swagger不能显示@RequestBody标记过的对象中的字段
+     * @param tagQueryDTO
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/testObject")
+    @ApiOperation(value="测试object显示", notes="测试object显示")
+    public TagQueryDTO testObject(@RequestBody TagQueryDTO tagQueryDTO) {
+        return tagQueryDTO;
     }
 }
